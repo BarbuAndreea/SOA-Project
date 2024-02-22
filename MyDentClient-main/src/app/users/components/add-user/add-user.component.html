@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="card">
+        <div class="text-center p-3">
+            <h1>Add a new user</h1>
+            <h4>Please fill in the form!</h4>
+        </div>
+        <div class="row justify-content-center text-center">
+            <form class="w-75" [formGroup]="addUserForm" #formDirective="ngForm" (ngSubmit)="onSubmit(formDirective)">
+                <div class="mb-3">
+                    <select required formControlName="role" class="form-control" (change)="onChangeRole($event)">
+                        <option [ngValue]="null" hidden>Select role</option>
+                        <option *ngIf="currentUserRole == UserRole.SuperAdmin" [ngValue]="[userRoles[1]]">{{userRoles[1]}}</option>
+                        <option [ngValue]="[userRoles[2]]">{{userRoles[2]}}</option>
+                        <option [ngValue]="[userRoles[3]]">{{userRoles[3]}}</option>
+                    </select>
+                </div>
+                <div *ngIf="showClinicSelect" class="mb-3">
+                    <select required formControlName="clinic" class="form-control" (change)="onChangeClinic($event)">
+                        <option [ngValue]="null" hidden disabled>Select clinic</option>
+                        <option *ngFor="let clinic of clinics" [ngValue]="clinic.id">{{clinic.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="showSpecial" class="mb-3">
+                    <select required formControlName="specialization" class="form-control" (change)="onChangeSpecialization($event)">
+                        <option [ngValue]="null" hidden disabled>Select secialization</option>
+                        <option *ngFor="let type of specializations | keyvalue" [ngValue]="type.value">{{type.value}}</option>
+                    </select>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" formControlName="firstName" class="form-control" id="floatingInput" placeholder="First Name" [ngClass]="{ 'is-invalid': submitted && formFields['firstName'].errors}" />
+                    <label for="floatingInput">First name</label>
+                    <div *ngIf="submitted && formFields['firstName'].errors" class="invalid-feedback">
+                        <div *ngIf="formFields['firstName'].errors['required']">First name is required</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" formControlName="lastName" class="form-control" id="floatingInput" placeholder="Last Name" [ngClass]="{ 'is-invalid': submitted && formFields['lastName'].errors}" />
+                    <label for="floatingInput">Last name</label>
+                    <div *ngIf="submitted && formFields['lastName'].errors" class="invalid-feedback">
+                        <div *ngIf="formFields['lastName'].errors['required']">Last name is required</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="number" formControlName="age" class="form-control" id="floatingInput" placeholder="Age" [ngClass]="{ 'is-invalid': submitted && formFields['age'].errors}" />
+                    <label for="floatingInput">Age</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" formControlName="phone" class="form-control" id="floatingInput" placeholder="Phone Number" [ngClass]="{ 'is-invalid': submitted && formFields['phone'].errors}" />
+                    <label for="floatingInput">Phone Number</label>
+                    <div *ngIf="submitted && formFields['phone'].errors" class="invalid-feedback">
+                        <div *ngIf="formFields['phone'].errors['required']">Phone number is required</div>
+                    </div>
+                </div>
+                <div class="form-floating form-group mt-2 mb-3">
+                    <input type="text" formControlName="email" class="form-control" id="floatingInput" placeholder="Email address" [ngClass]="{ 'is-invalid': submitted && formFields['email'].errors }" />
+                    <label for="floatingInput">Email address</label>
+                    <div *ngIf="submitted && formFields['email'].errors" class="invalid-feedback">
+                        <div *ngIf="formFields['email'].errors['required']">Email is required</div>
+                    </div>
+                </div>
+                <div class="form-floating form-group mb-3">
+                    <input type="password" formControlName="password" class="form-control" id="floatingInput2" aria-describedby="passwordHelp" 
+                    placeholder="Password" [ngClass]="{ 'is-invalid': submitted && formFields['password'].errors }" />
+                    <label for="floatingInput2">Password</label>
+                    <div *ngIf="submitted && formFields['password'].errors" class="invalid-feedback">
+                        <div *ngIf="formFields['password'].errors['required']">Password is required</div>
+                    </div>
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3 mb-0">{{errorMessage}}</div>
+                <button class="btn btn-primary mb-3">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

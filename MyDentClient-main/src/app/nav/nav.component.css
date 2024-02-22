@@ -1,0 +1,17 @@
+.btn-text {
+    font-size: 75%;
+}
+.btn-right{
+    margin-left: auto;
+    margin-right: 27px;
+}
+
+.logo{
+    font-size: 35px;
+    margin: 10px 30px;
+}
+
+.logout-button{
+    color: rgba(255, 94, 54, 0.422);
+    font-size: 24px;
+}

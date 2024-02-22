@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+    <div class="col-md-5">
+    <mat-card>
+    <h2 class="my-3">Please fill in the form below to add or edit a room.</h2>
+    <form [formGroup]="roomForm" (ngSubmit)="onSubmit()" class="form" autocomplete="off">
+      <div class="mb-3 padding">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" name="nameInput" formControlName="nameInput" class="form-control" id="nameInput" required>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Medical Equipment</label>
+        <textarea name="equipmentInput" class="form-control" formControlName="equipmentInput" id="equipmentInput"
+          required></textarea>
+      </div>
+    </form>
+  
+    <div class="btn-toolbar">
+      <button type="button" class="a btn btn-primary" (click)="cancelAddRoom()" id="cancelButton"> Cancel
+      </button>
+      <button type="button" [disabled]="!roomForm.valid" class="btn btn-primary" (click)="onSubmit()"> Submit
+      </button>
+    </div>
+    </mat-card>
+    </div>
+    <div class="col-md-7">
+        <mat-card>
+        <div class="position-relative">
+            <h1 class="my-3">Here are all the rooms.</h1>
+            <table class="table table-striped table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>No.</th>
+                        <th>Room</th>
+                        <th>Medical Equipment</th>
+                        <th class="px-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let room of rooms">
+                        <td class="fw-bold">{{ rooms.indexOf(room) + 1 }}</td>
+                        <td>{{ room.name }}</td>
+                        <td *ngIf="room.medicalEquipment === null"></td>
+                        <td *ngIf="room.medicalEquipment !== null && room.medicalEquipment.length < 50">{{ room.medicalEquipment }} </td>
+                        <td class="block text-break" *ngIf="room.medicalEquipment !== null && room.medicalEquipment.length > 50"> 
+                            <p *ngIf="!isFullDescriptionVisibile; then thenBlock else elseBlock"></p>
+                            <ng-template #thenBlock>
+                                {{room.medicalEquipment.substring(0,50) }}...
+                                <mat-icon style="cursor:pointer;" matTooltip="See more" (click)="toggleFullDescription()">
+                                    keyboard_arrow_down</mat-icon>
+                            </ng-template>
+                            <ng-template #elseBlock>
+                                {{room.medicalEquipment}} <mat-icon matTooltip="Hide" style="cursor:pointer;"
+                                    (click)="toggleFullDescription()">
+                                    keyboard_arrow_up</mat-icon>
+                            </ng-template>
+                        </td>
+                        <td><button mat-icon-button (click)="populateForm(room)"><mat-icon matTooltip="Edit"> border_color</mat-icon></button><button mat-icon-button (click)="onDeleteRoom(room.id)"><mat-icon matTooltip="Delete">delete</mat-icon></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </mat-card>
+    </div>
+</div>
+</div>

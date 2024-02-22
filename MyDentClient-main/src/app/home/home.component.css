@@ -1,0 +1,76 @@
+.card-header {
+  background-color: rgba(2, 177, 45, 0.74);
+  margin-bottom: 0%;
+}
+select {
+    padding: 4px 3px 5px 5px;
+    width: 140px;
+    height: 50px;
+    padding-left: 22px;
+    font-size: medium;
+    color: rgb(0, 0, 0);
+    border: 1px solid #cdcdcd;
+    border-radius: 4px;
+    box-shadow: inset 1px 1px 2px #ddd8dc;
+    background-color: rgba(238, 238, 238, 0.312);
+}
+
+.drop{
+  margin-right:0;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .col {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
+  margin-left: 10px;
+  padding: 0%;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.card-body{
+  padding-bottom: 15px;
+}
+
+h1, h2, h3, h4, option, button{
+  font-family: "Poppins-Regular", Arial, sans-serif;
+}
+
+h1{
+font-size: 34px;
+font-weight: bold;
+}
+
+h2{
+  font-size: 25px;
+}
+
+h3{
+  font-size: 20px;
+}
+
+.importCard{
+  width: 30%;
+  margin-left: 35%;
+}
+
+.input-code{
+  font-size: medium;
+  width: 10em;
+  height: 2.3em;
+}
+
+.welcome{
+  font-family: "Poppins-Regular", Arial, sans-serif;
+  font-size: 34px;
+  font-weight: bold;
+}

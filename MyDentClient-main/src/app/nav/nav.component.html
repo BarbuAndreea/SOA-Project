@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-light justify-content-around fs-4 mb-4" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="nav-link logo" [routerLink]="['home']">MyDent</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+        <li class="nav-item my-2 mx-3 "
+          *ngIf="this.currentUserRole == userRole.Medic || this.currentUserRole == userRole.ClinicAdmin">
+          <a class="nav-link" [routerLink]="['search_patient']">Patients</a>
+        </li>
+        <li class="nav-item my-2 mx-3 " *ngIf="this.currentUserRole == userRole.SuperAdmin">
+          <a class="nav-link" [routerLink]="['search_user']">Users</a>
+        </li>
+        <li class="nav-item m-2"
+          *ngIf="this.currentUserRole === userRole.Medic || this.currentUserRole == userRole.ClinicAdmin">
+          <a class="nav-link" [routerLink]="['medic/appointments_by_date']">Appointments</a>
+        </li>
+        <li class="nav-item my-2 mx-3" *ngIf="this.currentUserRole === userRole.Patient">
+          <a class="nav-link" [routerLink]="['/personal_file']">My file</a>
+        </li>
+        <li class="nav-item my-2 mx-3" *ngIf="this.currentUserRole === userRole.Patient">
+          <a class="nav-link" [routerLink]="['/my_appointments']">Appointments</a>
+        </li>
+        <li class="nav-item my-2 mx-3" *ngIf="this.currentUserRole === userRole.Patient">
+          <a class="nav-link" [routerLink]="['/my_appointments_history']">History</a>
+        </li>
+        <li class="nav-item my-2 mx-3" *ngIf="this.currentUserRole === userRole.Patient">
+          <a class="nav-link" [routerLink]="['patient_radiograpies']">Radiographies</a>
+        </li>
+        <li class="nav-item my-2 mx-3" *ngIf="this.currentUserRole === userRole.SuperAdmin">
+          <a class="nav-link" [routerLink]="['add_user']">Add user</a>
+        </li>
+        <li class="nav-item m-2" *ngIf="this.currentUserRole === userRole.ClinicAdmin">
+          <a class="nav-link" [routerLink]="['add_user']">Add user</a>
+        </li>
+        <li class="nav-item my-2 mx-3" *ngIf="this.currentUserRole === userRole.SuperAdmin">
+          <a class="nav-link" [routerLink]="['add_clinic']">Add clinic</a>
+        </li>
+        <li class="nav-item m-2" *ngIf="this.currentUserRole === userRole.ClinicAdmin">
+          <a class="nav-link" [routerLink]="['add_room']">Add room</a>
+        </li>
+      </ul>
+      <button class="btn logout-button" type="button" (click)="logout()">Log Out</button>
+      <div class="btn-right">
+        <button *ngIf="this.currentUserRole === userRole.Medic" class="btn-text" mat-fab color="accent"
+          [matTooltip]="currentUserFirstName +' '+currentUserLastName" matToolTipPosition="after"
+          [routerLink]="['medic_info']">
+          {{currentUserFirstName[0]}}{{currentUserLastName[0]}}
+        </button>
+        <button *ngIf="this.currentUserRole === userRole.Patient || this.currentUserRole === userRole.ClinicAdmin"
+          class="btn-text" mat-fab color="accent" [matTooltip]="currentUserFirstName +' '+currentUserLastName"
+          matToolTipPosition="after">
+          {{currentUserFirstName[0]}}{{currentUserLastName[0]}}
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

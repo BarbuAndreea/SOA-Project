@@ -1,0 +1,28 @@
+<div class="ms-4">
+    <div class="row justify-content-center text-center">
+        <div class="w-75">
+            <div *ngIf="!isEditMode">
+                <h3><b>Yey! Let's go on holiday!</b></h3>
+                <p>Please select the period.</p>
+            </div>
+            <div *ngIf="isEditMode">
+                <h3><b>You changed your mind about this holiday. No problem!</b></h3>
+                <p>Please select the period.</p>
+            </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose the start date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="selectedStartDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Choose the end date</mat-label>
+            <input matInput [matDatepicker]="picker2" [(ngModel)]="selectedEndDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        </div>
+        <button class="btn btn-primary mb-3" type="button" (click)="onSubmit()"> Submit </button>
+        <div *ngIf="backendErrorMessage" class="alert alert-danger mt-3 mb-0">{{backendErrorMessage}}</div>
+    </div>
+</div>

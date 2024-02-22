@@ -1,0 +1,12 @@
+h1, h2, h3, h4, p{
+    font-family: "Poppins-Regular", Arial, sans-serif;
+  }
+
+.btn{
+    font-family: "Poppins-Regular", Arial, sans-serif;
+}
+
+h2{
+    font-size: 25px;
+    font-weight: bold;
+}

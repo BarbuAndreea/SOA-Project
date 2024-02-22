@@ -1,0 +1,15 @@
+p {
+    margin: 24% 24%;
+    text-align: center;
+    color: rgba(167, 185, 255, 0.656)
+}
+
+
+h1, h2, h3, h4, p{
+    font-family: "Poppins-Regular", Arial, sans-serif;
+  }
+  
+  h1{
+  font-size: 25px;
+  font-weight: bold;
+  }

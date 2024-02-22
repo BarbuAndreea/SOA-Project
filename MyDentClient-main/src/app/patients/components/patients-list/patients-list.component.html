@@ -1,0 +1,58 @@
+<div class="container w-75">
+    <h1 class="text-center">Clinic's Patients</h1>
+    <mat-card>
+        <mat-card-title>
+            <h2>Search for a patient</h2>
+        </mat-card-title>
+        <form [formGroup]="searchPatientForm">
+            <div class="mb-3 row">
+                <div class="col">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" formControlName="firstNameInput" class="form-control" id="firstNameInput">
+                </div>
+                <div class="col">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" formControlName="lastNameInput" class="form-control" id="lastNameInput">
+                </div>
+                <div class="col">
+                    <div class="buttons-in-col">
+                        <button type="button" class="btn btn-primary button-focus mx-2" (click)="onSubmit()"> Search
+                        </button>
+                        <button type="button" class="btn btn-primary button-focus" (click)="getPatients()"> Display All
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card>
+    <div *ngIf="errorMessage !== ''" class="alert alert-danger mt-3 mb-0">
+        <p>{{errorMessage}}</p>
+    </div>
+
+    <mat-card class="position-relative mt-4">
+    <div>
+        <h1 class="mb-3">Results:</h1>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th class="file">Patient's file</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let patient of patientList">
+                    <td class="w-25">{{ patient.userP.firstName}}</td>
+                    <td class="w-25">{{ patient.userP.lastName }}</td>
+                    <td>{{ patient.userP.email }}</td>
+                    <td class="text-center"><a class="btn btn-success btn-sm rounded-1 p-2"
+                            [routerLink]="['/patient_info', patient.id ]" type="button" title="file">
+                            <i class="fa fa-vcard"></i>
+                        </a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </mat-card>
+</div>

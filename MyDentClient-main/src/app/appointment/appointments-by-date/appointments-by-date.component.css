@@ -1,0 +1,29 @@
+.card-header{
+    background-color: blanchedalmond;
+}
+
+h1, h2, h3, h4{
+    font-family: "Poppins-Regular", Arial, sans-serif;
+  }
+  
+  h1{
+  font-size: 30px;
+  font-weight: bold;
+  }
+
+  h2{
+    font-size: 25px;
+  }
+
+  .center{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    grid-auto-rows: minmax(200px, auto);
+  }
+
+  /* .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */

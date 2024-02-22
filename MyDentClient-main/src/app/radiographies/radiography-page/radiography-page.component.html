@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 position-relative mt-4">
+    <mat-card>
+      <div *ngIf="user.role == UserRole.Medic">
+        <h1>Here are all the x-rays for the patient: {{patient.userP.firstName}} {{patient.userP.lastName}}</h1>
+      </div>
+      <div *ngIf="user.role == UserRole.Patient">
+        <h1 class="mb-5 text-center">Here are your radiographies!</h1>
+      </div>
+      <table class="table table-hover">
+          <thead class="thead-dark">
+              <tr>
+                  <th>No.</th>
+                  <th>Date</th>
+                  <th class="text-center">Show</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let image of patient.radiographies">
+                  <td class="fw-bold">{{ patient.radiographies.indexOf(image) + 1 }}</td>
+                  <td class="w-25">{{ image.date | date : "d MMMM y"}}</td>
+                  <td class="text-center"><button mat-icon-button (click)="onSelectRadiography(image.image64)"><mat-icon>visibility</mat-icon></button>
+              </tr>
+          </tbody>
+      </table>
+      <div *ngIf="warningMessage" class="alert alert-danger mt-3 mb-0">{{warningMessage}}</div>
+    </mat-card>
+    </div>
+    
+  
+    <div class="col-md-7" style="background-color: rgba(231, 231, 255, 0.114);">
+      <p *ngIf="!showImage">Click the eye to see the radiography</p>
+      <img *ngIf="showImage" width="100%" height="100%" [src]="selectedRadiography" alt="AAAAA">
+    </div>
+  </div>
+  <div *ngIf="user.role == UserRole.Medic">
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+    <span class="upload" *ngIf="message">
+    {{message}}
+    </span>
+    <button type="button" class="btn btn-primary button-focus m-3" (click)="backToPatientFile()">
+      Back to patient's file</button>
+  </div>
+</div>

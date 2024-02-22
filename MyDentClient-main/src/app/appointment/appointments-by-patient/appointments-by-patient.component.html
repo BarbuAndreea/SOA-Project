@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="text-center mt-5 mb-4">Here are your next appointments</h1>
+  <mat-card>
+  <table class="table table-striped table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>No.</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Intervention</th>
+            <th>Medic</th>
+            <th>Room</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let appointment of appointmentsList">
+            <td class="fw-bold">{{ appointmentsList.indexOf(appointment) + 1 }}</td>
+            <td>{{ appointment.startDate | date : "d MMMM y (EEE)"}}</td>
+            <td><b>{{appointment.startDate | date: "HH:mm"}}-{{appointment.endDate | date:"HH:mm"}}</b></td>
+            <td>{{ appointment.name }}</td>
+            <td>{{ appointment.medic?.userM?.firstName }}</td>
+            <td>{{ appointment.roomName }}</td>
+            <td>{{ AppointmentStatus[appointment.status] }} </td>
+        </tr>
+      </tbody>
+  </table>
+<div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+</mat-card>

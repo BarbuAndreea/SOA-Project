@@ -1,0 +1,27 @@
+<div class="container w-50">
+<h1 class="text-center pt-2 m-5">Interventions</h1>
+<mat-card>
+<mat-card *ngIf="currentUserRole == userRole.Patient">
+<h2>Total cost for all the interventions: {{totalCost}}</h2>
+</mat-card>
+<button *ngIf="currentUserRole == userRole.Medic" class="btn btn-primary button-focus mt-3" (click)="openDialog(undefined)" type="button" title="Edit">Add intervention</button>
+<div class="card my-3" *ngFor="let intervention of interventionList" >
+    <h3 class="card-header fw-bold">{{intervention.name}}</h3>
+    <div class="card-body text-center">
+      <h3 class="card-title">{{intervention.date | date : "d MMMM y (EEE)"}}</h3>
+      <h3>Medic: {{intervention.medic?.userM?.lastName}} {{intervention.medic?.userM?.firstName}}</h3>
+      <h3>Teeth: {{ToothEnum[intervention.teeth]}}</h3>
+      <h3 *ngIf="intervention.description">
+        Description: {{intervention.description}} <br></h3>
+      <h3 *ngIf="intervention.recommendation">
+        Recommendation: {{intervention.recommendation}} <br></h3>
+      
+      <h3 *ngIf="this.currentUserId == intervention.medic?.userM?.id || this.currentUserRole == UserRole.Patient">Price: {{intervention.price}}</h3>
+
+      <button mat-raised-button color="accent" *ngIf="currentUserRole == userRole.Medic && intervention.medic?.userM?.id == currentUserId " (click)="openDialog(intervention)">Edit</button>
+    </div>
+</div>
+<div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+</mat-card>
+</div>

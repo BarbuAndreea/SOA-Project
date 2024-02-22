@@ -1,0 +1,13 @@
+<div class="card container text-center w-75 mt-4" *ngIf="patient">
+    <h2 class="card-title">Patient's info</h2>
+    <div class="card-body">
+        <p>First name: {{patient.userP.firstName}}</p>
+        <p>Last name: {{patient.userP.lastName}}</p>
+        <p>Age: {{patient.userP.age}}</p>
+        <p>Phone number: {{patient.userP.phoneNumber}}</p>
+        <p>Email: {{patient.userP.email}}</p>
+        <a class="btn btn-primary" [routerLink]="['/radiography', patient?.id]">See radiographies</a>
+    </div>
+</div>
+
+<app-interventions-list></app-interventions-list>

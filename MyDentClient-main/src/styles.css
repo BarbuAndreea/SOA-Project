@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~font-awesome/css/font-awesome.css';
+
+html, body { height: 100%; }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+@font-face {
+    font-family: "Poppins-Regular";
+    src: local("LemonMilkRegular-X3XE2"), url(assets/fonts/Poppins-Regular.ttf) format("truetype");
+}
+
+h1, h2, h3, h4, p, button, th, td, label{
+    font-family: "Poppins-Regular", Arial, sans-serif;
+}

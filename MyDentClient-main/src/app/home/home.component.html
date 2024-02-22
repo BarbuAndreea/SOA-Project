@@ -1,0 +1,71 @@
+<div class="text-center pt-5">
+  <p class="welcome">Welcome to MyDent, {{currentUserName}}!</p>
+  <h5 class="text-secondary">{{currentDate | date : "fullDate"}}</h5>
+</div>
+<hr class="mt-5">
+<div *ngIf="currentUserRole == UserRole.SuperAdmin" class="text-center pt-5">
+  <h1>You are the admin!</h1>
+</div>
+<div *ngIf="currentUserRole == UserRole.Medic" class="container w-75">
+  <h2 class="text-center">Active appointments</h2>
+  <div class="row">
+    <div class="card col" *ngFor="let appointment of activeAppointments">
+      <h3 class="card-header">{{appointment.startDate | date : "d MMMM y (EEE)"}} &nbsp;&nbsp;
+        <b>{{appointment.startDate | date: "HH:mm"}}-{{appointment.endDate | date:"HH:mm"}}</b>
+      </h3>
+      <div class="card-body">
+        <h3>Intervention: {{appointment.name}}</h3>
+        <h3>Patient: {{appointment.patient?.userP?.firstName}} {{appointment.patient?.userP?.lastName}}</h3>
+        <h3>
+          Room: {{appointment.roomId}}
+        </h3>
+        <div class="drop">
+          <select #statusForm (change)="onStatusChanged(statusForm.value, appointment)">
+            <option [value]="appointment.status" selected hidden>{{AppointmentStatus[appointment.status]}}</option>
+            <option *ngFor="let s of status | keyvalue" [value]="s.key">{{s.value}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+
+  <hr>
+  <app-appointments-by-date></app-appointments-by-date>
+</div>
+
+<div *ngIf="currentUserRole == UserRole.Patient" class="container w-75">
+  <h1 class="my-5">Your clinics:</h1>
+  <mat-card>
+  <mat-accordion>
+    <mat-expansion-panel class="m-3" *ngFor="let clinic of clinics" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>{{clinic.name}}</b>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{clinic.phoneNumber}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>Address: {{clinic.address}}</p>
+      <p>Email: {{clinic.email}}</p>
+      <p>Description: {{clinic.description}}</p>
+      <div class="col-md-6" *ngIf="clinic.mapsAddress">
+        <iframe [src]="clinic.mapsAddress | safe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div *ngIf="warningMessage" class="alert alert-danger mt-3 mb-0">{{warningMessage}}</div>
+</mat-card>
+</div>
+
+<mat-card class="importCard" [class.mat-elevation-z8]="true" *ngIf="currentUserRole == UserRole.ClinicAdmin">
+  <div class="container w-75 d-flex justify-content-center">
+    <div class="text-center">
+      <h2>You are a clinic admin!</h2>
+      <h3>Import a patient to your clinic</h3>
+      <input class="input-code m-3" [(ngModel)]="patientCode">
+      <button class="btn btn-primary m-3" (click)="importPatient(patientCode)">Import</button>
+    </div>
+  </div>
+  <div *ngIf="importError" class="alert alert-danger">{{importError}}</div>
+</mat-card>

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\appointment",
+    "\\src\\app\\appointment\\add-appointment",
+    "\\src\\app\\clinic",
+    "\\src\\app\\clinic\\components",
+    "\\src\\app\\clinic\\components\\add-clinic",
+    "\\src\\app\\home",
+    "\\src\\app\\models"
+  ],
+  "SelectedNode": "\\src\\app\\appointment\\add-appointment\\add-appointment.component.ts",
+  "PreviewInSolutionExplorer": false
+}
